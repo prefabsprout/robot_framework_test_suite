@@ -11,7 +11,8 @@ class MainPage(PageObject):
         "password": "css:#password",
         "login_button": "css:#login-button",
         "service_dropdown_button": "css:.uui-header .nav > li:nth-child(3) > a",
-        "different_element_page_button": "css:.uui-header .nav > li:nth-child(3) > ul > :nth-child(8)"
+        "different_element_page_button": "css:.uui-header .nav > li:nth-child(3) > ul > :nth-child(8)",
+        "user_table_page_button": "css:.uui-header .nav > li:nth-child(3) > ul > :nth-child(6)"
     }
 
     def _is_current_page(self):
@@ -36,3 +37,7 @@ class MainPage(PageObject):
     @keyword(name="I click on Different Elements button in Service dropdown")
     def go_to_different_elements_page(self):
         self.selib.find_element(self.locator.different_element_page_button).click()
+
+    @keyword(name=" I click on User Table button in Service dropdown")
+    def go_to_user_table_page(self):
+        self.selib.find_element(self.locator.user_table_page_button).click()
