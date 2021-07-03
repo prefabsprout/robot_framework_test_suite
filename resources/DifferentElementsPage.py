@@ -11,6 +11,7 @@ class DifferentElementsPage(PageObject):
     _locators = {
         "wind_checkbox": "css:.main-content-hg > div:nth-child(2) >label:nth-child(3) input",
         "water_checkbox": "css:.main-content-hg > div:nth-child(2) >label:nth-child(1) input",
+        "selen_radiobutton": "css:.main-content-hg > div:nth-child(3) >label:nth-child(4) input",
         "log_section": "xpath://ul[@class='panel-body-list logs']//li[1]",
         "element_dropdown": "css:.main-content-hg > div:nth-child(4) select"
     }
@@ -22,6 +23,10 @@ class DifferentElementsPage(PageObject):
                       self.PAGE_URL + " but it did not"
             raise Exception(message)
         return True
+
+    @keyword("I select Selen radiobutton")
+    def select_selen_radiobutton(self):
+        self.selib.find_element(self.locator.selen_radiobutton).click()
 
     @keyword("I select Wind checkbox")
     def select_wind_checkbox(self):
@@ -47,3 +52,11 @@ class DifferentElementsPage(PageObject):
         current_time = datetime.now().strftime("%H:%M:%S")
         assert self.selib.find_element(
             self.locator.log_section).text == f'{current_time} Colors: value changed to {value_from_dropdown}'
+
+    @keyword("I should see logs about interaction with radiobutton")
+    def should_logs_about_radiobutton_interaction_exist(self, radiobutton_name):
+        current_time = datetime.now().strftime("%H:%M:%S")
+        print(self.selib.find_element(self.locator.log_section).text)
+        print(f'{current_time} metal: value changed to {radiobutton_name}')
+        assert self.selib.find_element(
+            self.locator.log_section).text == f'{current_time} metal: value changed to {radiobutton_name}'
