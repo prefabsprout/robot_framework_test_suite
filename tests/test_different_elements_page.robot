@@ -34,3 +34,15 @@ Valid Water checkbox functionality
     And I select Water checkbox
     Then I should see logs about interaction with checkbox  Water
     And close browser
+
+Valid dropdown functionality
+    [Documentation]     Verify that dropdown works correctly
+    Given open browser  ${ROOT}     ${BROWSER}
+    And go to page      MainPage
+    When I login as user      ${USERNAME}      ${PASSWORD}
+    And I click on Service button in Header
+    And I click on Different Elements button in Service dropdown
+    And go to page  DifferentElementsPage
+    And I select from dropdown element   Yellow
+    Then I should see logs about interaction with dropdown element  Yellow
+    And close browser
