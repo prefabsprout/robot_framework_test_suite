@@ -12,7 +12,8 @@ class UserTablePage(PageObject):
     _locators = {
         "sergey_ivan_vip_checkbox": "css:#ivan",
         "log_section": "xpath://ul[@class='panel-body-list logs']//li[1]",
-        "table": "xpath://table"
+        "table": "xpath://table",
+        "vip_checkboxes": "css:[type='checkbox']"
     }
 
     __test_data = {'Number': [1, 2, 3, 4, 5, 6],
@@ -48,3 +49,7 @@ class UserTablePage(PageObject):
     @keyword("I should see expected values in User table")
     def should_user_table_contains_expected_values(self):
         assert self.get_page_table_data().equals(self.__test_dataframe)
+
+    @keyword("I should see 6 VIP checkboxes on page")
+    def should_vip_checkboxes_be_presented(self):
+        assert len(self.selib.find_elements(self.locator.vip_checkboxes)) == 6

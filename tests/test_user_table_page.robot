@@ -11,6 +11,17 @@ Library     PageObjectLibrary
 Suite Teardown  Close all browsers
 
 *** Test Cases ***
+Valid VIP checkboxes presence
+    [Documentation]     Verify that User table page contains 6 VIP checkboxes
+    Given open browser  ${ROOT}     ${BROWSER}
+    And go to page      MainPage
+    And I login as user      ${USERNAME}      ${PASSWORD}
+    And I click on Service button in Header
+    When I click on User Table button in Service dropdown
+    And go to page  UserTablePage
+    Then I should see 6 VIP checkboxes on page
+    And close browser
+
 Valid VIP checkbox functionality
     [Documentation]     Verify that VIP checkboxes work correctly
     Given open browser  ${ROOT}     ${BROWSER}
