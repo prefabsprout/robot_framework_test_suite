@@ -1,9 +1,8 @@
-from PageObjectLibrary import PageObject
 from datetime import datetime
 
-from robot.api.deco import keyword
-
 import pandas as pd
+from PageObjectLibrary import PageObject
+from robot.api.deco import keyword
 from selenium.webdriver.support.select import Select
 
 
@@ -20,7 +19,8 @@ class UserTablePage(PageObject):
     }
 
     __test_data = {'Number': [1, 2, 3, 4, 5, 6],
-                   'User': ["Roman", "Sergey Ivan", "Vladzimir", "Helen Bennett", "Yoshi Tannamuri", "Giovanni Rovelli"],
+                   'User': ["Roman", "Sergey Ivan", "Vladzimir", "Helen Bennett", "Yoshi Tannamuri",
+                            "Giovanni Rovelli"],
                    "Description": ["Wolverine", "Spider Man", "Punisher", "Captain America some description",
                                    "Cyclope some description", "Hulksome description"]}
     __test_dataframe = pd.DataFrame(data=__test_data)
@@ -46,24 +46,28 @@ class UserTablePage(PageObject):
     @keyword("I should see logs about interaction with VIP checkbox")
     def should_logs_about_vip_checkbox_interaction_exist(self):
         current_time = datetime.now().strftime("%H:%M:%S")
-        assert self.selib.find_element(self.locator.log_section)\
-                   .text == f'{current_time} Vip: condition changed to true'
+        assert self.selib.find_element(self.locator.log_section) \
+                   .text == f'{current_time} Vip: condition changed to true', \
+            f"Checkbox interaction logs `{self.selib.find_element(self.locator.log_section).text}` is not " \
+            f"`{current_time} Vip: condition changed to true` as it expected"
 
     @keyword("I should see expected values in User table")
     def should_user_table_contains_expected_values(self):
-        assert self.get_page_table_data().equals(self.__test_dataframe)
+        assert self.get_page_table_data().equals(self.__test_dataframe), \
+            "User table content is not equals to expected"
 
     @keyword("I should see 6 VIP checkboxes on page")
     def should_vip_checkboxes_be_presented(self):
-        assert len(self.selib.find_elements(self.locator.vip_checkboxes)) == 6
+        assert len(self.selib.find_elements(self.locator.vip_checkboxes)) == 6, "Number of VIP checkboxes is not 6"
 
     @keyword("I should see 6 dropdowns on page")
     def should_number_type_dropdowns_be_presented(self):
-        assert len(self.selib.find_elements(self.locator.number_type_dropdowns)) == 6
+        assert len(self.selib.find_elements(self.locator.number_type_dropdowns)) == 6, "Number of dropdowns is not 6"
 
     @keyword("I should see expected values in any dropdown")
     def should_any_dropdown_contains_expected_values(self):
         dropdown_selector = Select(self.selib.find_element(self.locator.roman_dropdown)).options
         dropdown_elements = [dropdown_element.text for dropdown_element in dropdown_selector]
         expected_dropdown_elements = ["Admin", "User", "Manager"]
-        assert dropdown_elements == expected_dropdown_elements
+        assert dropdown_elements == expected_dropdown_elements, \
+            f"{dropdown_elements} is not equal to expected {expected_dropdown_elements}"

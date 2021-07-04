@@ -1,6 +1,6 @@
-from PageObjectLibrary import PageObject
 from datetime import datetime
 
+from PageObjectLibrary import PageObject
 from robot.api.deco import keyword
 from selenium.webdriver.support.select import Select
 
@@ -45,18 +45,24 @@ class DifferentElementsPage(PageObject):
     def should_logs_about_checkbox_interaction_exist(self, checkbox_name):
         current_time = datetime.now().strftime("%H:%M:%S")
         assert self.selib.find_element(
-            self.locator.log_section).text == f'{current_time} {checkbox_name}: condition changed to true'
+            self.locator.log_section).text == f'{current_time} {checkbox_name}: condition changed to true', \
+            f"Checkbox interaction logs `{self.selib.find_element(self.locator.log_section).text}` is not " \
+            f"`{current_time} {checkbox_name}: condition changed to true` as it expected"
 
     @keyword("I should see logs about interaction with dropdown element")
     def should_logs_about_dropdown_interaction_exist(self, value_from_dropdown):
         current_time = datetime.now().strftime("%H:%M:%S")
         assert self.selib.find_element(
-            self.locator.log_section).text == f'{current_time} Colors: value changed to {value_from_dropdown}'
+            self.locator.log_section).text == f'{current_time} Colors: value changed to {value_from_dropdown}', \
+            f"Dropdown interaction logs `{self.selib.find_element(self.locator.log_section).text}` is not " \
+            f"`{current_time} Colors: value changed to {value_from_dropdown}` as it expected"
 
     @keyword("I should see logs about interaction with radiobutton")
     def should_logs_about_radiobutton_interaction_exist(self, radiobutton_name):
         current_time = datetime.now().strftime("%H:%M:%S")
         print(self.selib.find_element(self.locator.log_section).text)
         print(f'{current_time} metal: value changed to {radiobutton_name}')
-        assert self.selib.find_element(
-            self.locator.log_section).text == f'{current_time} metal: value changed to {radiobutton_name}'
+        assert self.selib.find_element(self.locator.log_section)\
+                   .text == f'{current_time} metal: value changed to {radiobutton_name}', \
+            f"Radiobutton interaction logs `{self.selib.find_element(self.locator.log_section).text}` is not " \
+            f"`{current_time} metal: value changed to {radiobutton_name}` as it expected"

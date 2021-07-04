@@ -6,7 +6,7 @@ class MainPage(PageObject):
     PAGE_URL = ""
 
     _locators = {
-        "profile_menu_button":  "css:.uui-profile-menu",
+        "profile_menu_button": "css:.uui-profile-menu",
         "username": "css:#name",
         "password": "css:#password",
         "login_button": "css:#login-button",
