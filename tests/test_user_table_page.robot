@@ -22,3 +22,14 @@ Valid VIP checkbox functionality
     When I select 'vip' checkbox for Sergey Ivan
     Then I should see logs about interaction with VIP checkbox
     And close browser
+
+Valid User table content
+    [Documentation]     Verify that User table contains expected content
+    Given open browser  ${ROOT}     ${BROWSER}
+    And go to page      MainPage
+    And I login as user      ${USERNAME}      ${PASSWORD}
+    And I click on Service button in Header
+    When I click on User Table button in Service dropdown
+    And go to page  UserTablePage
+    Then I should see expected values in User table
+    And close browser
