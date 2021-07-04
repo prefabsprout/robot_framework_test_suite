@@ -3,6 +3,8 @@ from datetime import datetime
 
 from robot.api.deco import keyword
 
+import pandas as pd
+
 
 class UserTablePage(PageObject):
     PAGE_URL = "/jdi-light/user-table.html"
@@ -10,6 +12,7 @@ class UserTablePage(PageObject):
     _locators = {
         "sergey_ivan_vip_checkbox": "css:#ivan",
         "log_section": "xpath://ul[@class='panel-body-list logs']//li[1]",
+        "table": "xpath://table"
     }
 
     def _is_current_page(self):
@@ -19,6 +22,11 @@ class UserTablePage(PageObject):
                       self.PAGE_URL + " but it did not"
             raise Exception(message)
         return True
+
+    def get_page_table_data(self):
+        html_table = self.selib.find_element(self.locator.table).get_attribute('outerHTML')
+        page_table = pd.read_html(html_table)[0]
+        page_table['Description'] = page_table['Description'].map(lambda x: x.rstrip('Vip'))
 
     @keyword("I select 'vip' checkbox for Sergey Ivan")
     def select_ivan_vip_checkbox(self):
