@@ -44,3 +44,15 @@ Valid User table content
     And go to page  UserTablePage
     Then I should see expected values in User table
     And close browser
+
+Valid dropdowns
+    [Documentation]     Verify that User table contains expected content
+    Given open browser  ${ROOT}     ${BROWSER}
+    And go to page      MainPage
+    And I login as user      ${USERNAME}      ${PASSWORD}
+    And I click on Service button in Header
+    When I click on User Table button in Service dropdown
+    And go to page  UserTablePage
+    Then I should see 6 dropdowns on page
+    And I should see expected values in any dropdown
+    And close browser

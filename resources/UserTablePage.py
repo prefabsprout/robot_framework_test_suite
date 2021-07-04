@@ -4,6 +4,7 @@ from datetime import datetime
 from robot.api.deco import keyword
 
 import pandas as pd
+from selenium.webdriver.support.select import Select
 
 
 class UserTablePage(PageObject):
@@ -13,7 +14,9 @@ class UserTablePage(PageObject):
         "sergey_ivan_vip_checkbox": "css:#ivan",
         "log_section": "xpath://ul[@class='panel-body-list logs']//li[1]",
         "table": "xpath://table",
-        "vip_checkboxes": "css:[type='checkbox']"
+        "vip_checkboxes": "css:[type='checkbox']",
+        "number_type_dropdowns": "xpath://td/select",
+        "roman_dropdown": "xpath://tbody/tr[1]/td[2]/select"
     }
 
     __test_data = {'Number': [1, 2, 3, 4, 5, 6],
@@ -53,3 +56,14 @@ class UserTablePage(PageObject):
     @keyword("I should see 6 VIP checkboxes on page")
     def should_vip_checkboxes_be_presented(self):
         assert len(self.selib.find_elements(self.locator.vip_checkboxes)) == 6
+
+    @keyword("I should see 6 dropdowns on page")
+    def should_number_type_dropdowns_be_presented(self):
+        assert len(self.selib.find_elements(self.locator.number_type_dropdowns)) == 6
+
+    @keyword("I should see expected values in any dropdown")
+    def should_any_dropdown_contains_expected_values(self):
+        dropdown_selector = Select(self.selib.find_element(self.locator.roman_dropdown)).options
+        dropdown_elements = [dropdown_element.text for dropdown_element in dropdown_selector]
+        expected_dropdown_elements = ["Admin", "User", "Manager"]
+        assert dropdown_elements == expected_dropdown_elements
