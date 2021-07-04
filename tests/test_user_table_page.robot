@@ -16,8 +16,8 @@ Valid VIP checkboxes presence
     Given open browser  ${ROOT}     ${BROWSER}
     And go to page      MainPage
     And I login as user      ${USERNAME}      ${PASSWORD}
-    And I click on Service button in Header
-    When I click on User Table button in Service dropdown
+    When I click on Service button in Header
+    And I click on User Table button in Service dropdown
     And go to page  UserTablePage
     Then I should see 6 VIP checkboxes on page
     And close browser
@@ -39,8 +39,8 @@ Valid User table content
     Given open browser  ${ROOT}     ${BROWSER}
     And go to page      MainPage
     And I login as user      ${USERNAME}      ${PASSWORD}
-    And I click on Service button in Header
-    When I click on User Table button in Service dropdown
+    When I click on Service button in Header
+    And I click on User Table button in Service dropdown
     And go to page  UserTablePage
     Then I should see expected values in User table
     And close browser
@@ -50,8 +50,8 @@ Valid dropdowns
     Given open browser  ${ROOT}     ${BROWSER}
     And go to page      MainPage
     And I login as user      ${USERNAME}      ${PASSWORD}
-    And I click on Service button in Header
-    When I click on User Table button in Service dropdown
+    When I click on Service button in Header
+    And I click on User Table button in Service dropdown
     And go to page  UserTablePage
     Then I should see 6 dropdowns on page
     And I should see expected values in any dropdown

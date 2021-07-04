@@ -34,10 +34,10 @@ class MainPage(PageObject):
     def open_service_sidebar_menu(self):
         self.selib.find_element(self.locator.service_dropdown_button).click()
 
-    @keyword(name="I click on Different Elements button in Service dropdown")
+    @keyword("I click on Different Elements button in Service dropdown")
     def go_to_different_elements_page(self):
         self.selib.find_element(self.locator.different_element_page_button).click()
 
-    @keyword(name=" I click on User Table button in Service dropdown")
+    @keyword(" I click on User Table button in Service dropdown")
     def go_to_user_table_page(self):
         self.selib.find_element(self.locator.user_table_page_button).click()
