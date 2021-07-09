@@ -1,0 +1,6 @@
+robotframework~=4.0.3
+robotframework-seleniumlibrary
+robotframework-pageobjectlibrary
+pandas~=1.2.5
+lxml
+selenium~=3.141.0
