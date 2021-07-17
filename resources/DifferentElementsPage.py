@@ -60,8 +60,6 @@ class DifferentElementsPage(PageObject):
     @keyword("I should see logs about interaction with radiobutton")
     def should_logs_about_radiobutton_interaction_exist(self, radiobutton_name):
         current_time = datetime.now().strftime("%H:%M:%S")
-        print(self.selib.find_element(self.locator.log_section).text)
-        print(f'{current_time} metal: value changed to {radiobutton_name}')
         assert self.selib.find_element(self.locator.log_section)\
                    .text == f'{current_time} metal: value changed to {radiobutton_name}', \
             f"Radiobutton interaction logs `{self.selib.find_element(self.locator.log_section).text}` is not " \
